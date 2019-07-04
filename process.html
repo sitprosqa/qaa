@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<?php
+	$username=$_POST['user'];
+	$password=$_POST['pass'];
+	/*
+	$username=stripcslashes($username);
+	$password=stripcslashes($password);
+	$username=mysql_real_escape_string($username);
+	$password=mysql_real_escape_string($password);
+	*/
+	$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "users";
+
+//connect to MySql						
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if(!$conn)
+{
+	echo "not connected";
+}
+	
+	$sql = "select * from users where username='$username'  and password='$password'";
+$result = $mysqli->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+		header('Location: home.html');
+       echo "Login sucess ,Welcome" ,$row['username'];
+    }
+} else {
+    header('Location: loginfail.html');
+}
+$mysqli->close();
+	
+	?>
+</body>
+</html>
+
+
+	
+	
